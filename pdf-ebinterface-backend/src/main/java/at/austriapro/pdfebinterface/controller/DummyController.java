@@ -2,6 +2,7 @@ package at.austriapro.pdfebinterface.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import at.austriapro.pdfebinterface.entity.Dummy;
 /**
  * Throwaway test controller.
  */
+@RequestMapping("/api")
 @RestController
 public class DummyController {
 
