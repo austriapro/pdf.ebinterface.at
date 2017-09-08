@@ -1,0 +1,32 @@
+# Generated Files #
+bin/
+target/
+*.class
+
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+
+# IDE Files #
+/.idea/
+.classpath
+.project
+.settings/
+*.swp
+*.iml
+atlassian-ide-plugin.xml
+rebel.xml
+
+# Unencrypted passwords #
+*-dev.properties
+*-stage.properties
+*-prod.properties
+*-vagrant.properties
+*-dev.yml
+*-stage.yml
+*-prod.yml
+*-vagrant.yml
+*-docker.yml
