@@ -2,6 +2,7 @@ package at.austriapro.pdfebinterface.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
+import javax.annotation.PostConstruct;
 
 import at.austriapro.pdfebinterface.entity.Dummy;
 
@@ -21,11 +24,17 @@ public class DummyController {
 
   private Random random = new Random();
 
-  @GetMapping("/dummies")
-  public List<Dummy> getDummies() throws InterruptedException {
-    List<Dummy> dummies = new ArrayList<>();
+  private List<Dummy> dummies = new ArrayList<>();
+
+
+  @PostConstruct
+  public void init() {
     dummies.add(Dummy.builder().name("foo").email("foo@example.com").uuid("1").build());
     dummies.add(Dummy.builder().name("bar").email("bar@example.com").uuid("2").build());
+  }
+
+  @GetMapping("/dummies")
+  public List<Dummy> getDummies() throws InterruptedException {
 
     int rd = random.nextInt(100);
 
@@ -42,8 +51,14 @@ public class DummyController {
   }
 
   @PostMapping("/dummy")
-  public Dummy postDummy(Dummy dummy) {
+  public Dummy postDummy(@RequestBody Dummy dummy) {
+
+    if (dummy.getUuid() != null) {
+      throw new RuntimeException("Cannot create new dummy with existing uuid");
+    }
+
     dummy.setUuid(UUID.randomUUID().toString());
+    dummies.add(dummy);
     return dummy;
   }
 
