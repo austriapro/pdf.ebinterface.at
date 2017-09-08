@@ -20,10 +20,13 @@ public class DummyController {
 
 
   @GetMapping("/dummies")
-  public List<Dummy> getDummies() {
+  public List<Dummy> getDummies() throws InterruptedException {
     List<Dummy> dummies = new ArrayList<>();
     dummies.add(Dummy.builder().name("foo").email("foo@example.com").uuid("1").build());
     dummies.add(Dummy.builder().name("bar").email("bar@example.com").uuid("2").build());
+
+    // fake latency
+    Thread.sleep(2000);
 
     return dummies;
   }
