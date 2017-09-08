@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import at.austriapro.pdfebinterface.entity.Dummy;
@@ -14,16 +15,25 @@ import at.austriapro.pdfebinterface.entity.Dummy;
 /**
  * Throwaway test controller.
  */
-@RequestMapping("/api")
 @RestController
+@RequestMapping("/api")
 public class DummyController {
 
+  private Random random = new Random();
 
   @GetMapping("/dummies")
   public List<Dummy> getDummies() throws InterruptedException {
     List<Dummy> dummies = new ArrayList<>();
     dummies.add(Dummy.builder().name("foo").email("foo@example.com").uuid("1").build());
     dummies.add(Dummy.builder().name("bar").email("bar@example.com").uuid("2").build());
+
+    int rd = random.nextInt(100);
+
+
+    // fake random failures.
+    if (rd > 80) {
+      throw new RuntimeException("Internal Server Error");
+    }
 
     // fake latency
     Thread.sleep(2000);
@@ -36,4 +46,5 @@ public class DummyController {
     dummy.setUuid(UUID.randomUUID().toString());
     return dummy;
   }
+
 }
