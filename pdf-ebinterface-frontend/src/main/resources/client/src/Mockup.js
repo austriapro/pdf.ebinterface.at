@@ -91,7 +91,7 @@ const Mockup = (props) => {
                   <ul className ="footer__meta__navlist">
                     <li><a href="https://www.wko.at/service/Austrian-Economic-Chambers.html">Englisch</a></li>
                     <li><a href="https://www.wko.at/site/mehrsprachige_info/start.html">Mehrsprachige Info</a></li>
-                    <li><a href="https://www.wko.at/service/Offenlegung_Wien1.html" target="_blank">Offenlegung</a></li>
+                    <li><a href="https://www.wko.at/service/Offenlegung_Wien1.html" target="_blank" rel="noopener noreferrer">Offenlegung</a></li>
                     <li><a href="https://www.wko.at/service/Datenschutzerklaerung---Cookie-Richtlinie.html">Datenschutz</a></li>
                     <li>© 2017 WKO</li>
                   </ul>
@@ -120,25 +120,25 @@ const Mockup = (props) => {
                         <div className="global-panel__content">
                           <ul className="link-list">
                             <li><strong>WKO.at</strong></li>
-                            <li><a href="https://webshop.wko.at/" target="_blank">Webshop</a></li>
-                            <li><a href="https://eservice.wko.at/" target="_blank">E-Services</a></li>
+                            <li><a href="https://webshop.wko.at/" target="_blank" rel="noopener noreferrer">Webshop</a></li>
+                            <li><a href="https://eservice.wko.at/" target="_blank" rel="noopener noreferrer">E-Services</a></li>
                           </ul>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <div className="global-panel__content">
                           <ul className="link-list">
-                            <li><a href="https://news.wko.at/" target="_blank">news.wko.at</a></li>
-                            <li><a href="http://www.wko.tv/" target="_blank">WKO.tv</a></li>
-                            <li><a href="http://www.wifi.at/" target="_blank">WIFI</a></li>
+                            <li><a href="https://news.wko.at/" target="_blank" rel="noopener noreferrer">news.wko.at</a></li>
+                            <li><a href="http://www.wko.tv/" target="_blank" rel="noopener noreferrer">WKO.tv</a></li>
+                            <li><a href="http://www.wifi.at/" target="_blank" rel="noopener noreferrer">WIFI</a></li>
                           </ul>
                         </div>
                       </div>
                       <div className="col-md-4">
                         <div className="global-panel__content">
                           <ul className="link-list">
-                            <li><a href="https://firmen.wko.at/" target="_blank">WKO Firmen A-Z</a></li>
-                            <li><a href="https://wkis.wko.at/benutzerverwaltung/" target="_blank">WKO Benutzerverwaltung</a></li>
+                            <li><a href="https://firmen.wko.at/" target="_blank" rel="noopener noreferrer">WKO Firmen A-Z</a></li>
+                            <li><a href="https://wkis.wko.at/benutzerverwaltung/" target="_blank" rel="noopener noreferrer">WKO Benutzerverwaltung</a></li>
                           </ul>
                         </div>
                       </div>
@@ -153,6 +153,5 @@ const Mockup = (props) => {
     </div>
   </div>
 };
-
 
 export default Mockup;
