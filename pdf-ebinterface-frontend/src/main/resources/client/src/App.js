@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Mockup from "./Mockup";
+
+import './wkostyle.css';
 
 class App extends Component {
 
@@ -48,7 +51,11 @@ class App extends Component {
   }*/
 
   render(){
-    if (this.state.loading === true) {
+
+
+    return <Mockup name={"Yes"}/>;
+
+   /* if (this.state.loading === true) {
       return (
         <div>Loading...</div>
       )}
@@ -74,7 +81,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
-    );
+    );*/
   }
 }
 

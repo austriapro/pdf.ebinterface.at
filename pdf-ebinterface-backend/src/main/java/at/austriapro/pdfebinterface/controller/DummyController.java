@@ -40,12 +40,12 @@ public class DummyController {
 
 
     // fake random failures.
-    if (rd > 80) {
-      throw new RuntimeException("Internal Server Error");
-    }
+   // if (rd > 80) {
+   //   throw new RuntimeException("Internal Server Error");
+  //  }
 
     // fake latency
-    Thread.sleep(2000);
+   // Thread.sleep(2000);
 
     return dummies;
   }
