@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import Mockup from "./Mockup";
 
@@ -14,6 +14,7 @@ class App extends Component {
       error: null,
       loading: true,
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount(){
@@ -50,12 +51,16 @@ class App extends Component {
       });
   }*/
 
+  handleChange(e) {
+    this.setState({text: e.target.value});
+  }
+
   render(){
 
 
-    return <Mockup name={"Yes"}/>;
+  //  return <Mockup name={"Yes"}/>;
 
-   /* if (this.state.loading === true) {
+    if (this.state.loading === true) {
       return (
         <div>Loading...</div>
       )}
@@ -63,11 +68,34 @@ class App extends Component {
     else if (this.state.loading === false) {
       return (
         <div>
+          <table>
+            <tr>
+              <th>UID</th>
+              <th>Name</th>
+              <th>eMail</th>
+            </tr>
           {this.state.users.map(item => {
             return (
-              <div key={item.uuid}>{JSON.stringify(item)}</div>
+              <tr>
+                <th>{item.uuid}</th>
+                <th>{item.name}</th>
+                <th>{item.email}</th>
+              </tr>
+//              <div key={item.uuid}>{JSON.stringify(item)}</div>
             )
           })}
+          </table>
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>eMail</th>
+            </tr>
+            <tr>
+              <th><input value={this.state.text} /></th>
+              <th><input value={this.state.text} /></th>
+            </tr>
+          </table>
+          <button>Save User</button>
         </div>
       )}
 
@@ -81,7 +109,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
-    );*/
+    );
   }
 }
 
