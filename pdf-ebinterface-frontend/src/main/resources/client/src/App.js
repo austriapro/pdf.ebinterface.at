@@ -14,7 +14,8 @@ class App extends Component {
       error: null,
       loading: true,
     };
-    this.handleChange = this.handleChange.bind(this);
+  //  this.handleChange = this.handleChange.bind(this);
+    this.addUser = this.addUser.bind(this);
   }
 
   componentDidMount(){
@@ -51,13 +52,22 @@ class App extends Component {
       });
   }*/
 
-  handleChange(e) {
+ /* handleChange(e) {
     this.setState({
       name: e.target.value,
       email: e.target.value
     });
   }
-
+*/
+  addUser(e) {
+    e.preventDefault();
+    let name = this.refs.name.value;
+    let email = this.refs.email.value;
+  //  let nextuuid = this.state.users[this.state.uuid] + 1;
+      this.setState({
+        users: this.state.users.concat({ name, email})
+      });
+  }
   render(){
 
 
@@ -77,6 +87,7 @@ class App extends Component {
               <th>Name</th>
               <th>eMail</th>
             </tr>
+
           {this.state.users.map(item => {
             return (
               <tr>
@@ -88,17 +99,21 @@ class App extends Component {
             )
           })}
           </table>
+          <form onSubmit={this.addUser}>
           <table>
             <tr>
               <th>Name</th>
               <th>eMail</th>
             </tr>
+
             <tr>
-              <th><input value={this.state.name} /></th>
-              <th><input value={this.state.email} /></th>
+              <th><input type="text" ref="name" /></th>
+              <th><input type="text" ref="email" /></th>
             </tr>
+
+            <button type="submit">Save User</button>
           </table>
-          <button onChange={}>Save User</button>
+          </form>
         </div>
       )}
 
