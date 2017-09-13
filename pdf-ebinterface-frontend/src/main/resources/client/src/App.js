@@ -52,7 +52,10 @@ class App extends Component {
   }*/
 
   handleChange(e) {
-    this.setState({text: e.target.value});
+    this.setState({
+      name: e.target.value,
+      email: e.target.value
+    });
   }
 
   render(){
@@ -91,11 +94,11 @@ class App extends Component {
               <th>eMail</th>
             </tr>
             <tr>
-              <th><input value={this.state.text} /></th>
-              <th><input value={this.state.text} /></th>
+              <th><input value={this.state.name} /></th>
+              <th><input value={this.state.email} /></th>
             </tr>
           </table>
-          <button>Save User</button>
+          <button onChange={}>Save User</button>
         </div>
       )}
 
