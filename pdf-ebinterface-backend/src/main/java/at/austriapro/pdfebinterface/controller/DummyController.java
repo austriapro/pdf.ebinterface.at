@@ -62,4 +62,19 @@ public class DummyController {
     return dummy;
   }
 
+  @DeleteMapping("/dummy/{uuid}")
+  public void deleteDummy(@PathVariable String uuid) {
+
+    if (uuid == null) {
+      throw new RuntimeException("Cannot create new dummy with existing uuid");
+    }
+
+    for (Iterator<? extends Dummy> it = dummies.iterator(); it.hasNext(); ) {
+      if (uuid.equals(it.next().uuid)) {
+        it.remove();
+        break;
+      }
+    }
+  }
+
 }
