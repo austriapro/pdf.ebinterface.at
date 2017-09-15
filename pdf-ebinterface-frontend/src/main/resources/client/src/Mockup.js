@@ -4,35 +4,55 @@ const Mockup = (props) => {
 
   return  <div>
             <div className ="top-section">
+              <div>
               <div className ="nav-section">
-                <header>
-                 <div id="location-info" >
-                  <div className="header">
-                   <div className="container header__content">
-                      <div className ="row">
-                       <div className="col-sm-7 col-xs-12 header__content__flex">
-                        <div className="header__logo">
-                            <img src="https://www.wko.at/service/templates/media/logo-wko.png-service" alt="WKO Logo" title="WKO Logo"/>
-                        </div>
-                       </div>
+            </div>
+              <header>
+               <div id="location-info" >
+                <div className="header">
+                 <div className="container header__content">
+                    <div className ="row">
+                     <div className="col-sm-7 col-xs-12 header__content__flex">
+                      <div className="header__logo">
+                        <a href="https://www.wko.at/service/Startseite.html" titel="Startseite">
+                          <img src="https://www.wko.at/service/templates/media/logo-wko.png-service" alt="WKO Logo" title="WKO Logo" />
+                        </a>
+                      </div>
                      </div>
-                  </div>
+                   </div>
                 </div>
               </div>
-            </header>
-            <div className="center">
-              <h1 className="pdf_generator"> PDF-Generator </h1>
-              <p className="alerts alert-info" >
-                Wählen Sie eine Datei aus, der Sie einen QR Code hinzufügen möchten. Tipp: Ziehen Sie das Dokument direkt auf die grau markierte Fläche.
-              </p>
-                <div className="file-up">
-                <button type="text">Datei auswählen</button>
-                <p>Keine ausgewählt</p>
-                </div>
             </div>
+            </header>
+                <div className="tfn">
+                  <div className="main" id="main-content">
+                <div className="container">
+                  <div className="row">
+                    <div>
+                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div className="center">
+                        <div>
+                        <h1 className="pdf_generator"> PDF-Generator </h1>
+                        </div>
+
+                        <p className="alerts alert-infoe" >
+                          Wählen Sie eine XML-Datei aus, der Sie einen QR Code hinzufügen möchten und direkt in PDF umwandeln möchten. Tipp: Ziehen Sie das Dokument direkt auf die rot markierte Fläche.
+                        </p>
+
+                        <div className="file-up">
+                          <form>
+                          <button type="text">Datei auswählen</button>
+                          Keine Ausgewählt
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
           </div >
         </div>
-    <div className="tfn">
+              </div>
       <footer className="footer-section">
         <div className="footer">
           <div className="container">
@@ -66,9 +86,6 @@ const Mockup = (props) => {
                       <li><a href="https://www.wko.at/service/zahlen-daten-fakten/start.html">Zahlen, Daten, Fakten</a></li>
                     </ul>
                   </li>
-                  <li>
-                    <h4><a href="https://www.wko.at/service/w/Veranstaltungen.html" title="Veranstaltungen">Veranstaltungen</a></h4>
-                  </li>
                   <li><h4>Die Wirtschaftskammer</h4>
                     <ul className="doormat__nav">
                       <li><a href="https://www.wko.at/service/w/wirtschaftskammer.html">Die Organisation</a></li>
@@ -79,9 +96,21 @@ const Mockup = (props) => {
                       <li><a href="https://www.wko.at/service/w/So-erreichen-Sie-uns.html" alt="Kontakt und Anfahrt" target="_blank" rel="noopener noreferrer" >Kontakt und Anfahrt</a></li>
                     </ul>
                   </li>
+                  <li><h4>Kontakt</h4>
+                    <ul className="doormat__nav">
+                      <li>Service-GmbH der Wirtschaftskammer Österreich</li>
+                      <li>Wiedner Hauptstraße 63. Postfach 126. A-1045 Wien</li>
+                      <li>T +43(0)5 90 900-5050</li>
+                      <li>F +43(0)5 90 900-236</li>
+                      <li><a href="mailto:mservice@wko.at">mservice@wko.at</a></li>
+                    </ul>
+                  </li>
+
                 </ul>
               </div>
+              <a href="https://www.wko.at/service/Startseite.html" titel="Startseite">
               <div className="col-md-3 text-center wko-wuerfel"></div>
+              </a>
             </div>
           </div>
           <div className="footer__meta">
@@ -90,19 +119,9 @@ const Mockup = (props) => {
                 <div className ="col-med-9">
                   <ul className ="footer__meta__navlist">
                     <li><a href="https://www.wko.at/service/Austrian-Economic-Chambers.html">Englisch</a></li>
-                    <li><a href="https://www.wko.at/site/mehrsprachige_info/start.html">Mehrsprachige Info</a></li>
                     <li><a href="https://www.wko.at/service/Offenlegung_Wien1.html" target="_blank" rel="noopener noreferrer">Offenlegung</a></li>
                     <li><a href="https://www.wko.at/service/Datenschutzerklaerung---Cookie-Richtlinie.html">Datenschutz</a></li>
                     <li>© 2017 WKO</li>
-                  </ul>
-                </div>
-                <div className="col-md-3">
-                  <ul className="global-navbar pull-right">
-                    <li><a className="footer__portals-link collapsed collapse-link scroll-to-bottom-link" data-delay="100" aria-expanded="false" aria-controls="footer-portals" href="https://www.wko.at#footer-portals" data-toggle="collapse" data-parent="#footer-collapse">
-                        <span>mehr WKO</span>
-                      <svg className="icon icon-th"></svg>
-                      </a>
-                    </li>
                   </ul>
                 </div>
               </div>
@@ -150,7 +169,8 @@ const Mockup = (props) => {
           </div>
         </div>
       </footer>
-    </div>
+              </div>
+
   </div>
 };
 

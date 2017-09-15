@@ -19,27 +19,15 @@ class App extends Component {
       },
     };
 
+    this.loadUser = this.loadUser.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
-  componentDidMount(){
-    fetch("/api/dummies/")
-      .then(response => {
-        if (response.status === 200) {
-          response.json().then(users => {
-          console.log(users);
-            this.setState({
-              users: users,
-              loading: false,
-              error: null,
-            })
-          });
-        }
-      });
-  }
+/*  componentDidMount + fetch written without lambda
 
-/*  componentDidMount(){
+    componentDidMount(){
     let $component = this;
     fetch("/api/dummies/")
       .then(function(response) {
@@ -57,8 +45,30 @@ class App extends Component {
       });
   }*/
 
+  componentDidMount(){
+    this.loadUser();
+  }
+
+// gets informations from server and renders the state component
+
+    loadUser(){
+      fetch("/api/dummies/")
+        .then(response => {
+          if (response.status === 200) {
+            response.json().then(users => {
+              console.log(users);
+              this.setState({
+                users: users,
+                loading: false,
+                error: null,
+              })
+            });
+          }
+        });
+    }
 
    handleChange(e) {
+     // target = html element -> triggers current event
     const etarget = e.target;
     // the name of the currently edited input field
     const fieldName = etarget.name;
@@ -68,8 +78,10 @@ class App extends Component {
     console.log('fieldName', fieldName);
     console.log('value of field', value);
     console.log("newUser", this.state.newUser);
+
     const tempUser = this.state.newUser;
     tempUser[fieldName] = value;
+
     console.log("newUserchanged", tempUser);
 
     this.setState ({
@@ -91,21 +103,42 @@ class App extends Component {
     })
       .then(result => {
         if (result.status === 200) {
-          
-        }
-        const newUsersArray = this.state.users;
-        newUsersArray.push(this.state.newUser);
-        this.setState({
-          users: newUsersArray
-          // users: this.state.users.push(this.state.newUser) doesnt work
-        });
-        }
 
-      )
+            result.json().then(newUser =>{
+            console.log("newUser ->>>>>>>>",newUser);
+            const newUsersArray = this.state.users;
+            console.log("newUsersAarray ->>>>>>>>>", newUsersArray);
+            newUsersArray.push(newUser);
+
+            this.setState({
+              users: newUsersArray
+              // users: this.state.users.push(this.state.newUser) doesn't work
+
+            });
+          })
+        }
+      })
   }
 
+  handleDelete(e, item){
+    e.preventDefault()
+
+    const deleteUrl = "/api/dummy/" + item.uuid;
+    fetch(deleteUrl, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(res => {
+        if (res.status === 200) {
+          this.loadUser();
+        }
+      })
+    }
+
   render(){
-  //  return <Mockup name={"Yes"}/>;
+    return <Mockup name={"Yes"}/>;
 
     if (this.state.loading === true) {
       return (
@@ -113,8 +146,8 @@ class App extends Component {
       )}
 
     else if (this.state.loading === false) {
-
       console.log('users is', this.state.users);
+
       return (
         <div>
           <table>
@@ -127,19 +160,21 @@ class App extends Component {
             </thead>
             <tbody>
 
+            {/**/}
           {this.state.users.map(item => {
             return (
               <tr key={item.uuid}>
-                <th>{item.uuid}</th>
-                <th>{item.name}</th>
-                <th>{item.email}</th>
+                <td>{item.uuid}</td>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                {/*Inline event triggers explicit for each item in the list*/}
+                <td><button onClick={(e) => { this.handleDelete(e, item)} }>DELETE User</button></td>
               </tr>
 //              <div key={item.uuid}>{JSON.stringify(item)}</div>
             )
           })}
             </tbody>
           </table>
-
            <form>
             <label>
               Name
@@ -149,8 +184,10 @@ class App extends Component {
               eMail
               <input type="text" name="email" onChange={this.handleChange} value={this.state.newUser.email}/>
             </label>
-
+              <br />
             <button  onClick={this.handleClick}>Save User</button>
+             <br />
+             <button  onClick={this.handleDelete}>Delete User</button>
            </form>
         </div>
       )}
@@ -167,8 +204,6 @@ class App extends Component {
       </div>
     );
   }
-
-
 }
 
 export default App;
