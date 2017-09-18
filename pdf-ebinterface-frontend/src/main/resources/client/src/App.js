@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Mockup from "./Mockup";
@@ -25,50 +25,62 @@ class App extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-/*  componentDidMount + fetch written without lambda
+  /*  componentDidMount + fetch written without lambda
 
-    componentDidMount(){
-    let $component = this;
-    fetch("/api/dummies/")
-      .then(function(response) {
-        if (response.status === 200) {
-          response.json().then(function(users){
-            console.log(users);
-            $component.setState({
-              users: users,
-              loading: false,
-              error: null,
-            })
-          });
-        }
-        else{}
-      });
-  }*/
-
-  componentDidMount(){
-    this.loadUser();
-  }
-
-// gets informations from server and renders the state component
-
-    loadUser(){
+      componentDidMount(){
+      let $component = this;
       fetch("/api/dummies/")
-        .then(response => {
+        .then(function(response) {
           if (response.status === 200) {
-            response.json().then(users => {
+            response.json().then(function(users){
               console.log(users);
-              this.setState({
+              $component.setState({
                 users: users,
                 loading: false,
                 error: null,
               })
             });
           }
+          else{}
         });
-    }
+    }*/
 
-   handleChange(e) {
-     // target = html element -> triggers current event
+  componentDidMount() {
+    this.loadUser();
+  }
+
+// gets informations from server and renders the state component
+
+  loadUser() {
+    fetch("/api/dummies/")
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(users => {
+            console.log(users);
+            this.setState({
+              users: users,
+              loading: false,
+              error: null,
+            })
+          });
+        }
+        else {
+          this.setState({
+            error: "Error"
+          })
+        }
+      })
+      .catch(error => {
+        if (error.status !== 200)
+          this.setState({
+            error: "Error"
+          })
+      });
+
+  }
+
+  handleChange(e) {
+    // target = html element -> triggers current event
     const etarget = e.target;
     // the name of the currently edited input field
     const fieldName = etarget.name;
@@ -84,7 +96,7 @@ class App extends Component {
 
     console.log("newUserchanged", tempUser);
 
-    this.setState ({
+    this.setState({
       newUser: tempUser
     });
   }
@@ -92,7 +104,7 @@ class App extends Component {
   handleClick(e) {
     e.preventDefault();
     console.log('click state', this.state);
-    console.log("name und mail", );
+    console.log("name und mail",);
 
     fetch("/api/dummy/", {
       method: "POST",
@@ -104,8 +116,8 @@ class App extends Component {
       .then(result => {
         if (result.status === 200) {
 
-            result.json().then(newUser =>{
-            console.log("newUser ->>>>>>>>",newUser);
+          result.json().then(newUser => {
+            console.log("newUser ->>>>>>>>", newUser);
             const newUsersArray = this.state.users;
             console.log("newUsersAarray ->>>>>>>>>", newUsersArray);
             newUsersArray.push(newUser);
@@ -120,7 +132,7 @@ class App extends Component {
       })
   }
 
-  handleDelete(e, item){
+  handleDelete(e, item) {
     e.preventDefault()
 
     const deleteUrl = "/api/dummy/" + item.uuid;
@@ -135,15 +147,21 @@ class App extends Component {
           this.loadUser();
         }
       })
+  }
+
+  render() {
+    return <Mockup name={"Yes"}/>;
+    if (this.state.error !== null) {
+      return (
+        <div>{this.state.error}</div>
+      )
     }
 
-  render(){
-    return <Mockup name={"Yes"}/>;
-
-    if (this.state.loading === true) {
+    else if (this.state.loading === true) {
       return (
         <div>Loading...</div>
-      )}
+      )
+    }
 
     else if (this.state.loading === false) {
       console.log('users is', this.state.users);
@@ -161,21 +179,26 @@ class App extends Component {
             <tbody>
 
             {/**/}
-          {this.state.users.map(item => {
-            return (
-              <tr key={item.uuid}>
-                <td>{item.uuid}</td>
-                <td>{item.name}</td>
-                <td>{item.email}</td>
-                {/*Inline event triggers explicit for each item in the list*/}
-                <td><button onClick={(e) => { this.handleDelete(e, item)} }>DELETE User</button></td>
-              </tr>
+            {this.state.users.map(item => {
+              return (
+                <tr key={item.uuid}>
+                  <td>{item.uuid}</td>
+                  <td>{item.name}</td>
+                  <td>{item.email}</td>
+                  {/*Inline event triggers explicit for each item in the list*/}
+                  <td>
+                    <button onClick={(e) => {
+                      this.handleDelete(e, item)
+                    }}>DELETE User
+                    </button>
+                  </td>
+                </tr>
 //              <div key={item.uuid}>{JSON.stringify(item)}</div>
-            )
-          })}
+              )
+            })}
             </tbody>
           </table>
-           <form>
+          <form>
             <label>
               Name
               <input type="text" name="name" onChange={this.handleChange} value={this.state.newUser.name}/>
@@ -184,18 +207,19 @@ class App extends Component {
               eMail
               <input type="text" name="email" onChange={this.handleChange} value={this.state.newUser.email}/>
             </label>
-              <br />
-            <button  onClick={this.handleClick}>Save User</button>
-             <br />
-             <button  onClick={this.handleDelete}>Delete User</button>
-           </form>
+            <br/>
+            <button onClick={this.handleClick}>Save User</button>
+            <br/>
+            <button onClick={this.handleDelete}>Delete User</button>
+          </form>
         </div>
-      )}
+      )
+    }
 
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo"/>
           <h2>Welcome to React</h2>
         </div>
         <p className="App-intro">
