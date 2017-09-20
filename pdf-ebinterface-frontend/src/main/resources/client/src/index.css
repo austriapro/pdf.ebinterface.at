@@ -43,3 +43,7 @@ span {
   margin-left: 10px;
 }
 
+.dragged {
+  border-width: 2px;
+  background-color: #E88F7A;
+}

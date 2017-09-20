@@ -1,6 +1,8 @@
 import React from 'react';
+import FileUp from './FileUp';
 
-const Mockup = (props) => {
+
+const Mockup = () => {
 
   return <div>
     <div className="top-section">
@@ -14,7 +16,7 @@ const Mockup = (props) => {
                 <div className="row">
                   <div className="col-sm-7 col-xs-12 header__content__flex">
                     <div className="header__logo">
-                      <a href="https://www.wko.at/service/Startseite.html" titel="Startseite">
+                      <a href="https://www.wko.at/service/Startseite.html">
                         <img src="https://www.wko.at/service/templates/media/logo-wko.png-service" alt="WKO Logo"
                              title="WKO Logo"/>
                       </a>
@@ -41,20 +43,7 @@ const Mockup = (props) => {
                         umwandeln möchten. Tipp: Ziehen Sie das Dokument direkt auf die rot markierte Fläche.
                       </p>
 
-                      <div className="file-up">
-                        <div className="container">
-                          <div className="row">
-                        <form >
-
-                          <button className ="OneAndOnlyButton" type="text">Datei auswählen</button>
-
-                        <span >
-                          Keine Ausgewählt
-                        </span>
-                        </form>
-                          </div>
-                        </div>
-                      </div>
+                      < FileUp      />
                     </div>
                   </div>
                 </div>
@@ -139,7 +128,7 @@ const Mockup = (props) => {
 
                 </ul>
               </div>
-              <a href="https://www.wko.at/service/Startseite.html" titel="Startseite">
+              <a href="https://www.wko.at/service/Startseite.html">
                 <div className="col-md-3 text-center wko-wuerfel"></div>
               </a>
             </div>
