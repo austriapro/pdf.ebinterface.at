@@ -30,3 +30,4 @@ rebel.xml
 *-prod.yml
 *-vagrant.yml
 *-docker.yml
+npm-debug.log

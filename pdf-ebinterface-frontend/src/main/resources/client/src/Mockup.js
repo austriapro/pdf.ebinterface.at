@@ -118,11 +118,10 @@ const Mockup = () => {
                   </li>
                   <li><h4>Kontakt</h4>
                     <ul className="doormat__nav">
-                      <li>Service-GmbH der Wirtschaftskammer Österreich</li>
-                      <li>Wiedner Hauptstraße 63. Postfach 126. A-1045 Wien</li>
-                      <li>T +43(0)5 90 900-5050</li>
-                      <li>F +43(0)5 90 900-236</li>
-                      <li><a href="mailto:mservice@wko.at">mservice@wko.at</a></li>
+                      <li>E-Center der Wirtschaftskammer Österreich</li>
+                      <li>Wiedner Hauptstraße 63</li>
+                      <li>A-1045 Wien</li>
+                      <li><a href="mailto:ecenter@wko.at">ecenter@wko.at</a></li>
                     </ul>
                   </li>
 
