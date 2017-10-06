@@ -7,6 +7,7 @@ class FileUp extends Component {
     this.state ={
       dragged: false,
       submited: false,
+      downloadUrl: null,
     }
 
     this.dragover_handler = this.dragover_handler.bind(this);
@@ -70,8 +71,12 @@ class FileUp extends Component {
       body: data
     }).then(result => {
       if (result.status === 200){
-        this.setState({
-          submited: true,
+
+        result.json().then(fileResult => {
+
+          const url = `/api/convert/${fileResult.uuid}`;
+          this.setState({ downloadUrl: url, submited: true });
+
         })
       }
       console.log('done');
@@ -99,7 +104,7 @@ class FileUp extends Component {
 
     if (this.state.submited === false) {
     } else {
-      downloadButton =<button onClick={this.pdfDownload}>Download PDF</button>;
+      downloadButton =<a href={this.state.downloadUrl} target="_blank">Download PDF</a>;
     }
       return (
         <div className={outerClassName} onDragOver={this.dragover_handler} onDragLeave={this.dragleave_handler} onDrop={this.drop_handler}>
