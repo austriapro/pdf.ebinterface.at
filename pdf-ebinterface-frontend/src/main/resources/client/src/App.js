@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import Mockup from "./Mockup";
-import Dropzone from 'knock-dropzone';
+// import Dropzone from 'knock-dropzone';
 import './wkostyle.css';
 
 
