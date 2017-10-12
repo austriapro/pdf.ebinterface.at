@@ -23,10 +23,9 @@ margin-bottom: 25px;
 }
 
 .file-up {
-  padding-bottom: 40px;
-  padding-left: 60px;
-  padding-right: 60px;
-  padding: 40px;
+  padding:40px 40px 40px 0px;
+
+  height: 200px;
   margin-top: 60px;
   margin-bottom: 2%;
   border-width: 1px;
@@ -45,19 +44,25 @@ span {
 
 .dragged {
   border-width: 2px;
-  background-color: #E88F7A;
+  background-color: #EAEAEA;
+}
+.pdf-loading{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .loading-circle-1 {
   border: 10px solid #31708f;;
   border-radius: 50%;
   border-top: 10px solid #E20613;
-  width: 180px;
-  height: 180px;
-  filter: blur(100%);
+  width: 120px;
+  height: 120px;
   -webkit-animation:  1s infinite spin;
   animation:  1s  infinite spin;
 }
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
@@ -67,3 +72,50 @@ span {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.uploadFile {
+  width: 100%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  postion: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  padding: 2px;
+  color: white;
+  background-color: #E20613;
+  display: inline-block;
+  postion:relativ;
+  padding: 10px 12px;
+  cursor: pointer;
+
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+  background-color: #31708f;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+
