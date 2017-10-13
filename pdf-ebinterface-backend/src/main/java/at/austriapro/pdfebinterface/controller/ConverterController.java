@@ -55,7 +55,7 @@ public class ConverterController {
   /**
    * curl -i http://127.0.0.1:8080/api/convert/{uuid}
    */
-  @GetMapping("/{uuid}")
+  @GetMapping("/{uuid}.pdf")
   public ResponseEntity<StreamingResponseBody> downloadFile(@PathVariable String uuid, HttpServletResponse response) {
 
     log.info("Client retrieves pdf with uuid {}. File cache contains {} items.", uuid, fileCache.size());

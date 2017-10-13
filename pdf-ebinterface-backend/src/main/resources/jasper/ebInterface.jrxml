@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
-<!-- 2016-01-21T11:15:29 -->
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ERPEL_STR_INVOICE_TYPE_2" pageWidth="595" pageHeight="852" whenNoDataType="AllSectionsNoDetail" columnWidth="483" leftMargin="56" rightMargin="56" topMargin="85" bottomMargin="26" isSummaryWithPageHeaderAndFooter="true" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
 	<property name="template.engine" value="tabular_template"/>
 	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
@@ -308,6 +307,18 @@
 	<field name="tax.amount" class="java.lang.Float">
 		<fieldDescription><![CDATA[/Invoice/Tax/VAT/VATItem/Amount]]></fieldDescription>
 	</field>
+	<field name="beneficiaryaccount.name" class="java.lang.String">
+		<fieldDescription><![CDATA[/Invoice/PaymentMethod/UniversalBankTransaction/BeneficiaryAccount/BankAccountOwner]]></fieldDescription>
+	</field>
+	<field name="beneficiaryaccount.IBAN" class="java.lang.String">
+		<fieldDescription><![CDATA[/Invoice/PaymentMethod/UniversalBankTransaction/BeneficiaryAccount/IBAN]]></fieldDescription>
+	</field>
+	<field name="beneficiaryaccount.BIC" class="java.lang.String">
+		<fieldDescription><![CDATA[/Invoice/PaymentMethod/UniversalBankTransaction/BeneficiaryAccount/BIC]]></fieldDescription>
+	</field>
+	<field name="beneficiaryaccount.PaymentReference" class="java.lang.String">
+		<fieldDescription><![CDATA[/Invoice/PaymentMethod/UniversalBankTransaction/PaymentReference]]></fieldDescription>
+	</field>
 	<field name="detail.headerdescription" class="java.lang.String">
 		<fieldDescription><![CDATA[../HeaderDescription]]></fieldDescription>
 	</field>
@@ -381,7 +392,7 @@
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="10"/>
+						<font size="9"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{detail.headerdescription}]]></textFieldExpression>
 				</textField>
@@ -397,7 +408,7 @@
 	<title>
 		<band height="104" splitType="Stretch">
 			<frame>
-				<reportElement x="299" y="0" width="180" height="104" uuid="15734038-dd92-4a3a-bc07-f885f74124db">
+				<reportElement x="298" y="0" width="180" height="104" uuid="15734038-dd92-4a3a-bc07-f885f74124db">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<image hAlign="Left">
@@ -420,7 +431,7 @@
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement x="0" y="22" width="482" height="75" uuid="4e287359-799a-4c6c-90a9-c421c2d90b3f">
+				<reportElement x="-1" y="22" width="482" height="75" uuid="4e287359-799a-4c6c-90a9-c421c2d90b3f">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
@@ -429,7 +440,7 @@
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textElement markup="html">
-						<font size="10" isBold="false"/>
+						<font size="9" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<html><b>Rechnungssteller:</b><br>"
 + ($F{biller.address.salutation} == null ? "" : ($F{biller.address.salutation}+"<br>"))
@@ -453,7 +464,7 @@
 						<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					</reportElement>
 					<textElement markup="html">
-						<font size="10" isBold="false"/>
+						<font size="9" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<html><b>Rechnungsempfänger:</b><br>"
 + ($F{invoicerecipient.address.salutation} == null ? "" : ($F{invoicerecipient.address.salutation}+"<br>"))
@@ -479,7 +490,7 @@
 						<printWhenExpression><![CDATA[$F{delivery.address.street} != null]]></printWhenExpression>
 					</reportElement>
 					<textElement markup="html">
-						<font size="10" isBold="false"/>
+						<font size="9" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<html><b>Lieferadresse:</b><br>"
 + ($F{delivery.address.salutation} == null ? "" : ($F{delivery.address.salutation}+"<br>"))
@@ -503,7 +514,7 @@
 						<printWhenExpression><![CDATA[$F{orderingparty.address.street} != null]]></printWhenExpression>
 					</reportElement>
 					<textElement markup="html">
-						<font size="10" isBold="false"/>
+						<font size="9" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<html><b>Besteller:</b><br>"
 + ($F{orderingparty.address.salutation} == null ? "" : ($F{orderingparty.address.salutation}+"<br>"))
@@ -534,7 +545,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement markup="none">
-						<font size="10" isBold="false"/>
+						<font size="9" isBold="false"/>
 						<paragraph tabStopWidth="150"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new String("Währung:\t" + $F{document.currency} + "\n"
@@ -566,7 +577,7 @@
 						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					</box>
 					<textElement markup="html">
-						<font size="10" isBold="false"/>
+						<font size="9" isBold="false"/>
 						<paragraph tabStopWidth="150"/>
 					</textElement>
 					<textFieldExpression><![CDATA["<br><b>Allgemeine Hinweise zur Rechnung:</b><br>"
@@ -893,12 +904,9 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="15" splitType="Stretch">
-			<line>
-				<reportElement positionType="Float" x="0" y="0" width="483" height="1" uuid="6d4ae5f0-64eb-4b16-aa5b-d92987876dbf"/>
-			</line>
+		<band height="98" splitType="Stretch">
 			<textField>
-				<reportElement positionType="Float" x="263" y="3" width="180" height="12" uuid="b17bd2fe-9e41-469a-9368-522aa5285c81">
+				<reportElement positionType="Float" x="260" y="80" width="180" height="12" uuid="b17bd2fe-9e41-469a-9368-522aa5285c81">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -908,7 +916,7 @@
 				<textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement positionType="Float" x="443" y="3" width="39" height="12" uuid="63ceb5e0-0a2e-4f40-9482-ee3d408bcb08">
+				<reportElement positionType="Float" x="440" y="80" width="39" height="12" uuid="63ceb5e0-0a2e-4f40-9482-ee3d408bcb08">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -916,6 +924,53 @@
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" von " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<rectangle radius="5">
+				<reportElement x="408" y="7" width="70" height="70" uuid="13cca521-f64c-45d3-bdd7-2d8d5b8be319"/>
+			</rectangle>
+			<componentElement>
+				<reportElement x="411" y="10" width="65" height="65" uuid="9d176ed8-12dd-4285-98d8-5ac580c20444">
+					<property name="com.jaspersoft.studio.unit.margin" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="M">
+					<jr:codeExpression><![CDATA["BCD\n"+
+"001\n"+
+"1\n"+
+"SCT\n"+
+$F{beneficiaryaccount.BIC}+"\n"+
+$F{beneficiaryaccount.name}+"\n"+
+$F{beneficiaryaccount.IBAN}+"\n"+
+$F{document.currency}+$F{document.totalgrossamount}+"\n"+
+"\n"+
+$F{beneficiaryaccount.PaymentReference}+
+"\n"]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<staticText>
+				<reportElement x="394" y="10" width="13" height="64" uuid="032fb036-1d3c-4da5-8fee-a1568f179b54"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" rotation="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Zahlen mit Code]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" x="200" y="9" width="184" height="68" forecolor="#000000" uuid="badd6521-bd68-4023-8db0-b8d3058a8b2f"/>
+				<box>
+					<pen lineColor="#969696"/>
+				</box>
+				<textElement>
+					<font fontName="DejaVu Sans" size="7"/>
+					<paragraph tabStopWidth="75"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Überweisung an:\n"+
+"Kontoinhaber:\t"+$F{beneficiaryaccount.name}+"\n"+
+"IBAN\t"+$F{beneficiaryaccount.IBAN}+"\n"+
+"BIC:\t"+$F{beneficiaryaccount.BIC}+"\n"+
+"Währung:\t"+$F{document.currency}+"\n"+
+"Betrag:\t"+$F{document.totalgrossamount}+"\n"+
+"Zahlungsreferenz:\t"+$F{beneficiaryaccount.PaymentReference}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
@@ -943,7 +998,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Warenwert"]]></textFieldExpression>
 			</textField>
@@ -953,7 +1008,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font size="10"/>
+					<font size="9"/>
 				</textElement>
 				<textFieldExpression><![CDATA[String.format($P{REPORT_LOCALE},"%,1.2f", $V{taxablebeforediscount})]]></textFieldExpression>
 			</textField>
@@ -984,7 +1039,9 @@
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Rechnungssumme Netto (exkl. USt.)"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Band">
@@ -997,7 +1054,9 @@
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None">
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{document.currency} + " " + String.format($P{REPORT_LOCALE},"%,1.2f", $V{taxablebeforediscount} + $V{sumsurcharge})]]></textFieldExpression>
 			</textField>
 			<componentElement>
@@ -1056,7 +1115,9 @@
 								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
-							<textElement textAlignment="Right"/>
+							<textElement textAlignment="Right">
+								<font size="9"/>
+							</textElement>
 							<textFieldExpression><![CDATA[$P{p_document_currency} + " " + String.format($P{REPORT_LOCALE},"%,1.2f", $F{tax.amount})]]></textFieldExpression>
 						</textField>
 						<textField isStretchWithOverflow="true">
@@ -1067,7 +1128,9 @@
 								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 								<printWhenExpression><![CDATA[$F{tax.ex} != null]]></printWhenExpression>
 							</reportElement>
-							<textElement textAlignment="Right"/>
+							<textElement textAlignment="Right">
+								<font size="9"/>
+							</textElement>
 							<textFieldExpression><![CDATA[$F{tax.ex}]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
@@ -1084,7 +1147,9 @@
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{document.currency} + " " + String.format($P{REPORT_LOCALE},"%,1.2f", $V{sumvat})]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -1100,7 +1165,9 @@
 					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement textAlignment="Right" verticalAlignment="Top"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Summe Umsatzsteuer"]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -1117,7 +1184,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Rechnungssumme Brutto (inkl. USt.)"]]></textFieldExpression>
 			</textField>
@@ -1133,7 +1200,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement textAlignment="Right">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{document.currency} + " " + String.format($P{REPORT_LOCALE},"%,1.2f", $F{document.totalgrossamount})]]></textFieldExpression>
 			</textField>
