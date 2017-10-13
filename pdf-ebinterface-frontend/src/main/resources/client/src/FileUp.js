@@ -9,6 +9,7 @@ class FileUp extends Component {
       loading: false,
       downloadUrl: null,
       submitted: false,
+      error: "",
     }
 
     this.dragover_handler = this.dragover_handler.bind(this);
@@ -51,20 +52,27 @@ class FileUp extends Component {
     fetch("/api/convert/", {
       method: "POST",
       body: formdata
-    }).then(result => {
-      if (result.status === 200) {
-        result.json().then(fileResult => {
-          const url = `/api/convert/${fileResult.uuid}`;
-          this.setState({
-            downloadUrl: url,
-            loading: false,
-            submitted: true,
-          });
-        })
-      }
     })
-    console.log("submitted " + this.state.submitted);
-    console.log("dragged " + this.state.dragged);
+      .then(result => {
+        if (result.status === 200) {
+          result.json().then(fileResult => {
+            const url = `/api/convert/${fileResult.uuid}`;
+            this.setState({
+              downloadUrl: url,
+              loading: false,
+              submitted: true,
+              error: "",
+            });
+          })
+        }
+        else{
+          this.setState({
+            error: "FEHLER: Dies ist keine XML-Datei, bitte überpüfen Sie Ihre Datei",
+            submitted: false,
+            loading: false,
+          })
+        }
+      })
   }
 
   drop_handler(e) {
@@ -91,13 +99,15 @@ class FileUp extends Component {
     }
     //diese Bedingung wird ausgeführt wenn wir einen positiven respond vom Server zurückbekommen und der Download Link wir dann eingeblendet
     if (this.state.submitted === true) {
-      downloadButton = <a href={this.state.downloadUrl} target="_blank">Download PDF</a>;
+      downloadButton = <a href={`${this.state.downloadUrl}.pdf`} target="_blank">Download PDF</a>;
     }
 
-    //Preloader wird aktiviert
+    //Preloader wird aktiviert oder Error wird eingeblendet
     if (this.state.loading === true) {
-      loading = <div className="loading-circle-1"></div>;
+      loading = <div className="loading-circle-1"></div>
     }
+    else
+      loading = <div>{this.state.error}</div>
 
     console.log(outerClassName);
     return (
@@ -111,8 +121,10 @@ class FileUp extends Component {
                 <label htmlFor="file">Wählen Sie eine XML Datei aus</label>
               </div>
             </form>
-            <div className="pdf-loading col-md-4">
-              {loading}
+            <div>
+              <div className="pdf-loading col-md-4">
+                {loading}
+              </div>
             </div>
             <div className="col-md-4 pdf-link">
               <div>
