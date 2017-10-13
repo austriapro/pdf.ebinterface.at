@@ -55,8 +55,7 @@ span {
 }
 
 .pdf-link{
-  padding-top: 12px;
-
+  padding-top: 11px;
 }
 
 .loading-circle-1 {
@@ -108,4 +107,8 @@ span {
   -moz-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
+}
+
+.pdf-error{
+  padding-top: 11px;
 }

@@ -21,7 +21,6 @@ class FileUp extends Component {
   dragover_handler(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = "copy";
-    console.log("File Crossed the Line");
     this.setState({
       dragged: true,
     })
@@ -29,7 +28,6 @@ class FileUp extends Component {
 
   dragleave_handler(e) {
     e.preventDefault();
-    console.log("File Leaves the Line");
     this.setState({
       dragged: false,
     })
@@ -45,7 +43,7 @@ class FileUp extends Component {
     const formdata = new FormData();
     formdata.append('file', file);
     formdata.append('name', file.name);
-    console.log("File " + file);
+   // console.log("File " + file);
     this.setState({
       loading: true,
     })
@@ -67,9 +65,10 @@ class FileUp extends Component {
         }
         else{
           this.setState({
-            error: "FEHLER: Dies ist keine XML-Datei, bitte überpüfen Sie Ihre Datei",
-            submitted: false,
+            error: "FEHLER: Dies ist keine gültige XML-Datei, bitte überpüfen Sie Ihre Datei!",
+            submitted:false,
             loading: false,
+
           })
         }
       })
@@ -107,9 +106,9 @@ class FileUp extends Component {
       loading = <div className="loading-circle-1"></div>
     }
     else
-      loading = <div>{this.state.error}</div>
+      loading = <div className="pdf-error">{this.state.error}</div>
 
-    console.log(outerClassName);
+    //console.log(outerClassName);
     return (
       <div className={outerClassName} onDragOver={this.dragover_handler} onDragLeave={this.dragleave_handler}
            onDrop={this.drop_handler}>
