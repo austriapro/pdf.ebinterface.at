@@ -69,7 +69,7 @@ public class ConverterController {
 
     return ResponseEntity.ok().header(
       "Content-Type", "application/pdf",
-        "Content-Disposition", String.format("attachment; filename='%s.xml'", uuid)
+        "Content-Disposition", String.format("attachment; filename='%s.pdf'", uuid)
     ).body(body);
   }
 
