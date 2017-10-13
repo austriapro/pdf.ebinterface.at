@@ -1,10 +1,10 @@
 package at.austriapro.pdfebinterface.controller;
 
 import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
 
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StopWatch;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
+import javax.servlet.http.HttpServletResponse;
+
+import at.austriapro.pdfebinterface.rendering.EbinterfaceRenderer;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,23 +28,27 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/convert")
 public class ConverterController {
 
-  private Cache<String, byte[]> files = CacheBuilder.newBuilder()
-      .maximumSize(1000)
-      .expireAfterWrite(10, TimeUnit.MINUTES)
-      .expireAfterAccess(10, TimeUnit.SECONDS)
-      .build();
+  @Autowired
+  private EbinterfaceRenderer renderer;
+
+  @Autowired
+  private Cache<String, byte[]> fileCache;
 
   /**
    * curl -i -X POST -H "Content-Type: multipart/form-data" -F "name=the-file-name" -F "file=@testfile.xml" http://127.0.0.1:8080/api/convert
    */
   @PostMapping
   public UploadResponse uploadFile(@RequestParam("name") String name, @RequestParam("file") MultipartFile file)
-      throws IOException {
+      throws Exception {
 
     String uuid = UUID.randomUUID().toString();
+    StopWatch watch = new StopWatch();
+    watch.start();
     log.info("Genarating pdf using uuid {}", uuid);
-    files.put(uuid, file.getBytes());
-    log.info("File cache contains {} items", files.size());
+    byte[] pdf = renderer.renderEbinterface(file.getBytes());
+    fileCache.put(uuid, pdf);
+    watch.stop();
+    log.info("Rendered pdf in {} ms. File cache contains {} items", watch.getTotalTimeMillis(), fileCache.size());
     return new UploadResponse(uuid);
   }
 
@@ -50,15 +56,21 @@ public class ConverterController {
    * curl -i http://127.0.0.1:8080/api/convert/{uuid}
    */
   @GetMapping("/{uuid}")
-  public Resource downloadFile(@PathVariable String uuid) {
-    log.info("Client retrieves pdf with uuid {}. File cache contains {} items.", uuid, files.size());
-    byte[] file = files.getIfPresent(uuid);
+  public ResponseEntity<StreamingResponseBody> downloadFile(@PathVariable String uuid, HttpServletResponse response) {
+
+    log.info("Client retrieves pdf with uuid {}. File cache contains {} items.", uuid, fileCache.size());
+    byte[] file = fileCache.getIfPresent(uuid);
 
     if (file == null) {
       throw new RuntimeException("Unable to retrieve file with uuid " + uuid);
     }
 
-    return new ByteArrayResource(file);
+    StreamingResponseBody body = outputStream -> outputStream.write(file);
+
+    return ResponseEntity.ok().header(
+      "Content-Type", "application/octet-stream",
+        "Content-Disposition", String.format("attachment; filename='%s.xml'", uuid)
+    ).body(body);
   }
 
   @Data
