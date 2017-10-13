@@ -42,7 +42,6 @@ public class ConverterController {
           throws IOException, InterruptedException {
 
     String uuid = UUID.randomUUID().toString();
-    Thread.sleep(2000);
     log.info("Genarating pdf using uuid {}", uuid);
     files.put(uuid, file.getBytes());
     log.info("File cache contains {} items", files.size());

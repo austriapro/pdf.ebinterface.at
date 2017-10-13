@@ -23,14 +23,15 @@ margin-bottom: 25px;
 }
 
 .file-up {
-  padding:40px 40px 40px 0px;
-
-  height: 200px;
+  padding:40px 40px 40px 40px;
+  min-height: 200px;
+  height: auto;
   margin-top: 60px;
   margin-bottom: 2%;
   border-width: 1px;
   border-style: solid;
   border-color: #E20613;
+
 }
 
 .doormat__nav {
@@ -46,11 +47,16 @@ span {
   border-width: 2px;
   background-color: #EAEAEA;
 }
+
 .pdf-loading{
-  width: 100%;
-  display: flex;
+  display:flex;
   align-items: center;
   justify-content: center;
+}
+
+.pdf-link{
+  padding-top: 12px;
+
 }
 
 .loading-circle-1 {
@@ -73,13 +79,7 @@ span {
   100% { transform: rotate(360deg); }
 }
 
-.uploadFile {
-  width: 100%;
-  height: auto;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
+
 
 .inputfile {
   width: 0.1px;
@@ -94,17 +94,14 @@ span {
   font-size: 14px;
   line-height: 20px;
   font-weight: bold;
-  padding: 2px;
   color: white;
   background-color: #E20613;
   display: inline-block;
   postion:relativ;
   padding: 10px 12px;
   cursor: pointer;
-
 }
 
-.inputfile:focus + label,
 .inputfile + label:hover {
   background-color: #31708f;
   -webkit-transition: all 0.3s ease;
@@ -112,10 +109,3 @@ span {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
-
-.inputfile:focus + label {
-  outline: 1px dotted #000;
-  outline: -webkit-focus-ring-color auto 5px;
-}
-
-
