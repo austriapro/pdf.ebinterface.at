@@ -103,19 +103,12 @@
 
             <resource>
                 <directory>src/main/resources/jasper</directory>
-                <filtering>true</filtering>
+                <filtering>false</filtering>
+                <targetPath>jasper</targetPath>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>**/*.jrxml</include>
                     <include>**/*.jpg</include>
                 </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-                <excludes>
-                    <exclude>**/*.xml</exclude>
-                    <exclude>**/*.jpg</exclude>
-                </excludes>
             </resource>
 
         </resources>
