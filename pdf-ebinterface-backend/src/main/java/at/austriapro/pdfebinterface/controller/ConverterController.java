@@ -68,7 +68,7 @@ public class ConverterController {
     StreamingResponseBody body = outputStream -> outputStream.write(file);
 
     return ResponseEntity.ok().header(
-      "Content-Type", "application/octet-stream",
+      "Content-Type", "application/pdf",
         "Content-Disposition", String.format("attachment; filename='%s.xml'", uuid)
     ).body(body);
   }
