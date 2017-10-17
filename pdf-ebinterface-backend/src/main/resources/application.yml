@@ -1,0 +1,9 @@
+spring:
+  http:
+    multipart:
+      maxRequestSize: 32MB
+      maxFileSize: 32MB
+server:
+  tomcat:
+    max-http-post-size: 33554432
+    max-request-size: 32MB
