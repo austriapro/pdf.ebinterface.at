@@ -44,7 +44,7 @@ public class ConverterController {
     String uuid = UUID.randomUUID().toString();
     StopWatch watch = new StopWatch();
     watch.start();
-    log.info("Genarating pdf using uuid {}", uuid);
+    log.info("Generating pdf using uuid {}", uuid);
     byte[] pdf = renderer.renderEbinterface(file.getBytes());
     fileCache.put(uuid, pdf);
     watch.stop();
@@ -56,7 +56,7 @@ public class ConverterController {
    * curl -i http://127.0.0.1:8080/api/convert/{uuid}
    */
   @GetMapping("/{uuid}.pdf")
-  public ResponseEntity<StreamingResponseBody> downloadFile(@PathVariable String uuid, HttpServletResponse response) {
+  public byte[] downloadFile(@PathVariable String uuid, HttpServletResponse response) {
 
     log.info("Client retrieves pdf with uuid {}. File cache contains {} items.", uuid, fileCache.size());
     byte[] file = fileCache.getIfPresent(uuid);
@@ -65,12 +65,10 @@ public class ConverterController {
       throw new RuntimeException("Unable to retrieve file with uuid " + uuid);
     }
 
-    StreamingResponseBody body = outputStream -> outputStream.write(file);
+    response.setHeader("Content-Type", "application/pdf");
+    response.setHeader("Content-Disposition", String.format("attachment; filename='%s.pdf'", uuid));
 
-    return ResponseEntity.ok().header(
-      "Content-Type", "application/pdf",
-        "Content-Disposition", String.format("attachment; filename='%s.pdf'", uuid)
-    ).body(body);
+    return file;
   }
 
   @Data
