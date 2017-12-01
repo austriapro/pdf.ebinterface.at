@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Loading from './Loading';
+import React from 'UploadButton.js';
 
 class FileUp extends Component {
   constructor(props) {
@@ -14,7 +16,6 @@ class FileUp extends Component {
 
     this.dragover_handler = this.dragover_handler.bind(this);
     this.dragleave_handler = this.dragleave_handler.bind(this);
-    this.onFileChange = this.onFileChange.bind(this);
     this.drop_handler = this.drop_handler.bind(this);
   }
 
@@ -47,6 +48,7 @@ class FileUp extends Component {
     this.setState({
       loading: true,
     })
+
     fetch("/api/convert/", {
       method: "POST",
       body: formdata
@@ -68,7 +70,6 @@ class FileUp extends Component {
             error: "FEHLER: Dies ist keine gültige XML-Datei, bitte überpüfen Sie Ihre Datei!",
             submitted:false,
             loading: false,
-
           })
         }
       })
@@ -84,12 +85,12 @@ class FileUp extends Component {
     this.submit_handler(e.target.files[0]);
   }
 
+
   render() {
 
     let spanText = "";
     let outerClassName = "file-up";
     let downloadButton;
-    let loading;
 
     //wenn man mit der Datei über das rote Fenster zieht wird diese Bedingung ausgelöst
     if (this.state.dragged === true) {
@@ -100,13 +101,6 @@ class FileUp extends Component {
     if (this.state.submitted === true) {
       downloadButton = <a href={`${this.state.downloadUrl}.pdf`} target="_blank">Download PDF</a>;
     }
-
-    //Preloader wird aktiviert oder Error wird eingeblendet
-    if (this.state.loading === true) {
-      loading = <div className="loading-circle-1"></div>
-    }
-    else
-      loading = <div className="pdf-error">{this.state.error}</div>
 
     //console.log(outerClassName);
     return (
@@ -121,9 +115,7 @@ class FileUp extends Component {
               </div>
             </form>
             <div>
-              <div className="pdf-loading col-md-4">
-                {loading}
-              </div>
+              <Loading loadingComp={this.state.loading} errorComp={this.state.error}/>
             </div>
             <div className="col-md-4 pdf-link">
               <div>
