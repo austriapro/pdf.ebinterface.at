@@ -65,11 +65,6 @@
             <artifactId>json-path</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -78,7 +73,7 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>2.3.1.RELEASE</version>
+                <version>2.3.4.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -117,7 +112,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.1.RELEASE</version>
+                <version>2.3.4.RELEASE</version>
                 <executions>
                     <execution>
                         <goals>
